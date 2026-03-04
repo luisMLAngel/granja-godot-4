@@ -2,9 +2,7 @@ class_name PlayerController extends CharacterBody2D
 
 @export var base_speed: float = 80.0
 
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var interaction_area: Area2D = $InteractionArea
-@onready var anim_sm: Node = $AnimationStateMachine # referencia a la máquina
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var can_move: bool = true
@@ -21,18 +19,9 @@ func _physics_process(_delta: float) -> void:
 	if can_move:
 		_apply_movement()
 
-	# Siempre actualiza la dirección en la máquina de estados,
-	# incluso si no puede moverse (para que el idle sea correcto)
-	# anim_sm.set_direction(direction)
-	_request_animation_movement()
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		_try_interact()
-
-	# Esquiva
-	if event.is_action_pressed("dodge") and can_move:
-		_dodge()
 
 # ── Movimiento ───────────────────────────────────────────────
 
@@ -49,20 +38,6 @@ func _apply_movement() -> void:
 func _energy_modifier() -> float:
 	var ratio = GameManager.get_energy() / 100.0
 	return lerp(0.7, 1.0, ratio)
-
-func _request_animation_movement() -> void:
-	print("direction: ", direction)
-	# Solo solicita walk/idle — no sobreescribe estados bloqueantes
-	# La máquina de estados rechaza el cambio si está en TOOL_USE, etc.
-	# if direction != Vector2.ZERO:
-	# 	anim_sm.request_state(anim_sm.Estado.WALK)
-	# else:
-	# 	anim_sm.request_state(anim_sm.Estado.IDLE)
-
-func _dodge() -> void:
-	print("dodge")
-	# anim_sm.request_state(anim_sm.Estado.DODGE)
-	# La lógica de física del dodge va aquí después
 
 # ── Interacción ──────────────────────────────────────────────
 
@@ -83,29 +58,12 @@ func _get_closest_target(candidates: Array) -> Node:
 			closest_target = c
 	return closest_target
 
-# ── Cómo otros sistemas usan la herramienta del jugador ─────
-
-func use_tool(tool: int) -> void:
-	# Los sistemas externos (TileSystem, FarmingSystem) llaman esto
-	# cuando el jugador ejecuta una acción con herramienta
-	anim_sm.request_state(
-		anim_sm.Estado.TOOL_USE,
-		tool
-	)
-
-func receive_damage(_amount: float) -> void:
-	anim_sm.request_state(anim_sm.Estado.HURT)
-
-func die() -> void:
-	anim_sm.request_state(anim_sm.Estado.DIE)
-	can_move = false
-
 # ── Eventos globales ─────────────────────────────────────────
 
 func _on_dialogue_started(_npc_id: String) -> void:
 	can_move = false
 	velocity = Vector2.ZERO
-	anim_sm.request_state(anim_sm.Estado.IDLE)
+	# pasar a estado idle
 
 func _on_dialogue_finished(_npc_id: String) -> void:
 	can_move = true
