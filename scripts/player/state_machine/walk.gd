@@ -5,14 +5,13 @@ func _on_process(_delta: float) -> void:
 
 
 func _on_physics_process(_delta: float) -> void:
-	print("player", player)
-	if player.direction == Vector2.DOWN:
+	if player.face_direction == Vector2.DOWN:
 		player.animation_player.play('walk_down')
-	elif player.direction == Vector2.UP:
+	elif player.face_direction == Vector2.UP:
 		player.animation_player.play('walk_up')
-	elif player.direction == Vector2.LEFT:
+	elif player.face_direction == Vector2.LEFT:
 		player.animation_player.play('walk_left')
-	elif player.direction == Vector2.RIGHT:
+	elif player.face_direction == Vector2.RIGHT:
 		player.animation_player.play('walk_right')
 	else:
 		player.animation_player.play('walk_down')
@@ -29,4 +28,4 @@ func _on_enter() -> void:
 
 
 func _on_exit() -> void:
-	pass
+	player.animation_player.stop()

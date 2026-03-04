@@ -1,12 +1,13 @@
 class_name PlayerController extends CharacterBody2D
 
-@export var base_speed: float = 80.0
+@export var base_speed: float = 40.0
 
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var can_move: bool = true
 var direction: Vector2 = Vector2.ZERO
+var face_direction: Vector2 = Vector2.DOWN # indica hacia donde mira el jugador
 
 func _ready() -> void:
 	GameManager.player = self
@@ -30,6 +31,9 @@ func _read_input() -> void:
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
 	).normalized()
+
+	if direction != Vector2.ZERO:
+		face_direction = direction
 
 func _apply_movement() -> void:
 	velocity = direction * base_speed * _energy_modifier()
