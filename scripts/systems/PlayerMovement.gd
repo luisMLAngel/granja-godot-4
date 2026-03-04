@@ -7,8 +7,8 @@ static func is_moving(velocity: Vector2, threshold := 1.0) -> bool:
 ## Normaliza la entrada para movimiento (por ejemplo, de WASD o joystick)
 static func get_input_vector() -> Vector2:
 	return Vector2(
-		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up")
 	).normalized()
 
 ## Determina la dirección cardinal dominante: "front", "back" o "side"

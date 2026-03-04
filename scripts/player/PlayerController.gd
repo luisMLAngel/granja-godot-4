@@ -27,19 +27,19 @@ func _physics_process(_delta: float) -> void:
 	_request_animation_movement()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_just_pressed("interact"):
+	if event.is_action_pressed("interact"):
 		_try_interact()
 
 	# Esquiva
-	if event.is_action_just_pressed("dodge") and can_move:
+	if event.is_action_pressed("dodge") and can_move:
 		_dodge()
 
 # ── Movimiento ───────────────────────────────────────────────
 
 func _read_input() -> void:
 	direction = Vector2(
-		Input.get_axis("move_left", "move_right"),
-		Input.get_axis("move_up", "move_down")
+		Input.get_axis("left", "right"),
+		Input.get_axis("up", "down")
 	).normalized()
 
 func _apply_movement() -> void:

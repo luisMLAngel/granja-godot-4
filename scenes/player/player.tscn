@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cci7n8g3suarw"]
+[gd_scene load_steps=32 format=3 uid="uid://cci7n8g3suarw"]
 
 [ext_resource type="Script" uid="uid://djpkky4jrhhst" path="res://scripts/player/PlayerController.gd" id="1_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://bpdsbsjrjqgd5" path="res://assets/sprites/Axe and Sickle/Skins/1.png" id="2_lgqa7"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://d37ksxion4qaa" path="res://assets/sprites/Walk/Hair's/Josh/Black.png" id="17_4hvnv"]
 [ext_resource type="Script" uid="uid://5cuvq5igfgtt" path="res://scripts/state_machine/state_machine_base.gd" id="18_lgqa7"]
 [ext_resource type="Script" uid="uid://ctbpu1qa8th7i" path="res://scripts/player/state_machine/idle.gd" id="19_8ydkj"]
+[ext_resource type="Script" uid="uid://bu0cn0d5j6yck" path="res://scripts/player/state_machine/walk.gd" id="20_8ydkj"]
 
 [sub_resource type="Animation" id="Animation_smehm"]
 length = 0.001
@@ -2185,11 +2186,12 @@ libraries = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 
-[node name="AnimationStateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_node_state")]
+[node name="StateMachineBase" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("18_lgqa7")
-initial_node_state = NodePath("../States/IdleState")
+initial_node_state = NodePath("IdleState")
 
-[node name="States" type="Node" parent="."]
-
-[node name="IdleState" type="Node" parent="States"]
+[node name="IdleState" type="Node" parent="StateMachineBase"]
 script = ExtResource("19_8ydkj")
+
+[node name="WalkState" type="Node" parent="StateMachineBase"]
+script = ExtResource("20_8ydkj")

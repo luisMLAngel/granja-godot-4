@@ -9,6 +9,7 @@ var current_node_state_name: String
 func _ready() -> void:
 	for child in get_children():
 		if child is StateBase:
+			print("child: ", child)
 			node_states[child.name.to_lower()] = child
 			child.node_to_control = node_to_control
 			child.state_machine = self
