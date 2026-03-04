@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cci7n8g3suarw"]
+[gd_scene load_steps=33 format=3 uid="uid://cci7n8g3suarw"]
 
 [ext_resource type="Script" uid="uid://djpkky4jrhhst" path="res://scripts/player/PlayerController.gd" id="1_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://bpdsbsjrjqgd5" path="res://assets/sprites/Axe and Sickle/Skins/1.png" id="2_lgqa7"]
@@ -2146,6 +2146,9 @@ _data = {
 &"walk_up": SubResource("Animation_uf5tr")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ydkj"]
+size = Vector2(7.4375, 3.5)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uf5tr")
 
@@ -2181,6 +2184,8 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.28125, 7.75)
+shape = SubResource("RectangleShape2D_8ydkj")
 
 [node name="InteractionArea" type="Area2D" parent="."]
 

@@ -5,7 +5,6 @@ func _on_process(_delta: float) -> void:
 
 
 func _on_physics_process(_delta: float) -> void:
-	print("IDLE", player.face_direction)
 	if player.face_direction == Vector2.DOWN:
 		player.animation_player.play('idle_down')
 	elif player.face_direction == Vector2.UP:

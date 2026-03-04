@@ -15,6 +15,7 @@ var player: Node = null
 # ── Estado mínimo global ─────────────────────────────────────
 # Solo lo que múltiples sistemas necesitan leer
 var current_day: int = 1
+var current_hour: float = 6.0
 var is_night: bool = false
 var current_zone: String = "zona_0"
 
@@ -39,10 +40,10 @@ func _on_zone_changed(zone_id: String) -> void:
 # Atajos para no buscar el sistema cada vez
 func get_energy() -> float:
 	if day_night_system:
-		return day_night_system.energy_vital
+		return day_night_system.vital_energy
 	return 100.0
 
 func get_hour() -> float:
 	if day_night_system:
-		return day_night_system.hora_actual
+		return day_night_system.current_hour
 	return 6.0

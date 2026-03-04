@@ -1,0 +1,136 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwr8rsogcv8py"]
+
+[ext_resource type="Texture2D" uid="uid://dxsycj4nydgje" path="res://assets/UI/Clock/Extras.png" id="1_nbmk3"]
+[ext_resource type="Script" uid="uid://dshcbucuoc0ev" path="res://scripts/ui/UiController.gd" id="1_nnfdp"]
+[ext_resource type="FontFile" uid="uid://277ym1ts6ih1" path="res://assets/fonts/04B_03__.TTF" id="2_frscm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frscm"]
+atlas = ExtResource("1_nbmk3")
+region = Rect2(140, 6, 60, 46)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_nnfdp")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 46.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_frscm")
+
+[node name="Control" type="Control" parent="Control/TextureRect"]
+anchors_preset = 0
+offset_left = 26.0
+offset_top = 5.0
+offset_right = 57.0
+offset_bottom = 13.0
+
+[node name="Time" type="RichTextLabel" parent="Control/TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_frscm")
+theme_override_font_sizes/normal_font_size = 8
+text = "00:00"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Day" type="RichTextLabel" parent="Control/TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 11.0
+offset_right = -19.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_frscm")
+theme_override_font_sizes/normal_font_size = 8
+text = "02"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Dot" type="RichTextLabel" parent="Control/TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = -5.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_frscm")
+theme_override_font_sizes/normal_font_size = 8
+text = "03"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Month" type="RichTextLabel" parent="Control/TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = -17.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_frscm")
+theme_override_font_sizes/normal_font_size = 8
+text = "."
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Dot2" type="RichTextLabel" parent="Control/TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 11.0
+offset_right = -5.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_frscm")
+theme_override_font_sizes/normal_font_size = 8
+text = "."
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Year" type="RichTextLabel" parent="Control/TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 11.0
+offset_right = 3.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_frscm")
+theme_override_font_sizes/normal_font_size = 8
+text = "01"
+scroll_active = false
+horizontal_alignment = 1

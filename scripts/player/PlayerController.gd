@@ -1,6 +1,6 @@
 class_name PlayerController extends CharacterBody2D
 
-@export var base_speed: float = 40.0
+@export var base_speed: float = 30.0
 
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -41,7 +41,7 @@ func _apply_movement() -> void:
 
 func _energy_modifier() -> float:
 	var ratio = GameManager.get_energy() / 100.0
-	return lerp(0.7, 1.0, ratio)
+	return lerp(0.25, 1.0, ratio)
 
 # ── Interacción ──────────────────────────────────────────────
 
