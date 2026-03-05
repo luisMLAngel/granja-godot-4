@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cci7n8g3suarw"]
+[gd_scene load_steps=34 format=3 uid="uid://cci7n8g3suarw"]
 
 [ext_resource type="Script" uid="uid://djpkky4jrhhst" path="res://scripts/player/PlayerController.gd" id="1_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://bpdsbsjrjqgd5" path="res://assets/sprites/Axe and Sickle/Skins/1.png" id="2_lgqa7"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://5cuvq5igfgtt" path="res://scripts/state_machine/state_machine_base.gd" id="18_lgqa7"]
 [ext_resource type="Script" uid="uid://ctbpu1qa8th7i" path="res://scripts/player/state_machine/idle.gd" id="19_8ydkj"]
 [ext_resource type="Script" uid="uid://bu0cn0d5j6yck" path="res://scripts/player/state_machine/walk.gd" id="20_8ydkj"]
+[ext_resource type="Script" uid="uid://b2wqo88yedyb1" path="res://scripts/player/ToolController.gd" id="21_3j4b4"]
 
 [sub_resource type="Animation" id="Animation_smehm"]
 length = 0.001
@@ -2182,6 +2183,7 @@ hframes = 24
 libraries = {
 &"": SubResource("AnimationLibrary_ur7pv")
 }
+autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.28125, 7.75)
@@ -2200,3 +2202,9 @@ script = ExtResource("19_8ydkj")
 
 [node name="WalkState" type="Node" parent="StateMachineBase"]
 script = ExtResource("20_8ydkj")
+
+[node name="CurrentTool" type="Node" parent="."]
+script = ExtResource("21_3j4b4")
+current_tool = 4
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -4,6 +4,7 @@ class_name PlayerController extends CharacterBody2D
 
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var tool_controller: ToolController = $CurrentTool
 
 var can_move: bool = true
 var direction: Vector2 = Vector2.ZERO

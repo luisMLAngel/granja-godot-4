@@ -1,4 +1,4 @@
-extends Node
+class_name TileSystem extends Node
 
 # ════════════════════════════════════════════════════════════
 # ESTADOS DE UN TILE
@@ -136,16 +136,15 @@ func seleccionar_tile(pos: Vector2i) -> void:
 # ════════════════════════════════════════════════════════════
 
 func remover_pasto(pos: Vector2i) -> void:
-	# Remueve el pasto liso y el decorativo si existe.
-	# Deja el suelo limpio y listo para arar.
-
-	# Verifica que la acción es válida en este tile
 	if get_estado(pos) != EstadoTile.EMPTY_WILD:
 		push_warning("TileSystem: no se puede remover pasto en %s" % pos)
 		return
 
-	layer_pasto.erase_cell(pos)
-	layer_pasto_deco.erase_cell(pos)   # si había pasto decorativo encima, también se va
+	# En lugar de erase_cell, usamos el sistema de terrenos.
+	# El -1 como terrain_id le dice a Godot "este tile ya no
+	# pertenece a ningún terrain" y recalcula los vecinos solos.
+	layer_pasto.set_cells_terrain_connect([pos], 0, -1)
+	layer_pasto_deco.erase_cell(pos)
 
 func arar(pos: Vector2i) -> void:
 	# Coloca un tile de tierra arada en la capa Terreno.

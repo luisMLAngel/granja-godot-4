@@ -12,7 +12,7 @@ func _is_mouse_over_blocking_ui() -> bool:
 func is_action_just_pressed(action_name: String) -> bool:
 	if _is_mouse_over_blocking_ui():
 		return false
-	return Input.is_action_just_pressed(action_name)
+	return Input.is_action_pressed(action_name)
 
 # Verifica si una acción está siendo sostenida
 func is_action_pressed(action_name: String) -> bool:

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=4 uid="uid://cf6kgwlj30htt"]
+[gd_scene load_steps=6 format=4 uid="uid://cf6kgwlj30htt"]
 
 [ext_resource type="TileSet" uid="uid://i3l7a5s3frr7" path="res://assets/tilesets/ranch.tres" id="1_8s07l"]
 [ext_resource type="PackedScene" uid="uid://cci7n8g3suarw" path="res://scenes/player/player.tscn" id="2_c0gy7"]
+[ext_resource type="Script" uid="uid://dmh83mh2u8owf" path="res://scripts/systems/TileSystem.gd" id="3_r7nt7"]
+[ext_resource type="Script" uid="uid://bymswimytbiv0" path="res://scripts/player/CursorTileController.gd" id="4_s28k0"]
+[ext_resource type="Texture2D" uid="uid://3nmw8sm67sd2" path="res://assets/UI/Extras.png" id="5_1psvb"]
 
 [node name="Ranch" type="Node2D"]
 
@@ -29,3 +32,25 @@ tile_set = ExtResource("1_8s07l")
 
 [node name="Player" parent="." instance=ExtResource("2_c0gy7")]
 position = Vector2(70, 99)
+
+[node name="TileSystem" type="Node" parent="." node_paths=PackedStringArray("layer_suelo", "layer_pasto", "layer_elevaciones", "layer_suelo_elevaciones", "layer_pasto_deco", "layer_terreno", "world_objects")]
+script = ExtResource("3_r7nt7")
+layer_suelo = NodePath("../Suelo")
+layer_pasto = NodePath("../PastoLiso")
+layer_elevaciones = NodePath("../Elevaciones")
+layer_suelo_elevaciones = NodePath("../SueloElevaciones")
+layer_pasto_deco = NodePath("../PastoDecorativo")
+layer_terreno = NodePath("../Terreno")
+world_objects = NodePath("../WorldObjects")
+
+[node name="TileCursor" type="Node2D" parent="." node_paths=PackedStringArray("tile_system")]
+position = Vector2(9, -8)
+script = ExtResource("4_s28k0")
+tile_system = NodePath("../TileSystem")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileCursor"]
+position = Vector2(45.5, 108.5)
+scale = Vector2(0.576923, 0.576923)
+texture = ExtResource("5_1psvb")
+region_enabled = true
+region_rect = Rect2(187, 11, 26, 26)
