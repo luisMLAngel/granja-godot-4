@@ -37,7 +37,9 @@ enum EstadoTile {
 
 @export var layer_suelo:    TileMapLayer
 @export var layer_pasto:    TileMapLayer
-@export var layer_deco:     TileMapLayer
+@export var layer_elevaciones:    TileMapLayer
+@export var layer_suelo_elevaciones:    TileMapLayer
+@export var layer_pasto_deco:     TileMapLayer
 @export var layer_terreno:  TileMapLayer
 
 # Contenedor de todos los objetos instanciados en el mundo.
@@ -143,7 +145,7 @@ func remover_pasto(pos: Vector2i) -> void:
 		return
 
 	layer_pasto.erase_cell(pos)
-	layer_deco.erase_cell(pos)   # si había pasto decorativo encima, también se va
+	layer_pasto_deco.erase_cell(pos)   # si había pasto decorativo encima, también se va
 
 func arar(pos: Vector2i) -> void:
 	# Coloca un tile de tierra arada en la capa Terreno.
