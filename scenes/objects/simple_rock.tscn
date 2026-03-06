@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dafxsito1pmux"]
+
+[ext_resource type="Script" uid="uid://c2m65x8y1bjsm" path="res://scripts/objects/RockController.gd" id="1_clw6h"]
+[ext_resource type="Texture2D" uid="uid://df748b1xyypp3" path="res://assets/objects/Ground stones.png" id="1_yqmfv"]
+[ext_resource type="Script" uid="uid://boqof4jd52dm0" path="res://scripts/components/HealthComponent.gd" id="3_sildw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha8sm"]
+atlas = ExtResource("1_yqmfv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clw6h"]
+atlas = ExtResource("1_yqmfv")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sildw"]
+atlas = ExtResource("1_yqmfv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q4vek"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha8sm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clw6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sildw")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_clw6h"]
+size = Vector2(11, 6)
+
+[node name="Rock" type="Area2D" node_paths=PackedStringArray("health_component", "anim_sprite")]
+script = ExtResource("1_clw6h")
+health_component = NodePath("HealthComponent")
+anim_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q4vek")
+animation = &"hurt"
+frame = 2
+frame_progress = 1.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_sildw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_clw6h")

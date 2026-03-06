@@ -189,13 +189,16 @@ func purificar(pos: Vector2i) -> void:
 func _hay_objeto_en(pos: Vector2i) -> bool:
 	# Convierte la posición del grid a posición mundial
 	var pos_mundo = layer_suelo.to_global(layer_suelo.map_to_local(pos))
-
 	# Revisa todos los objetos instanciados en WorldObjects
 	for objeto in world_objects.get_children():
+		print("objeto: ", objeto.global_position)
+		print("pos: ", pos, pos_mundo)
 		if not objeto.has_method("get_tiles_ocupados"):
+			print("objeto no tiene get_tiles_ocupados")
 			# Objeto simple — ocupa solo el tile en su posición
 			var objeto_tile = _mundo_a_grid(objeto.global_position)
 			if objeto_tile == pos:
+				print('hay un objeto')
 				return true
 		else:
 			# Objeto grande (árbol) — declara qué tiles ocupa

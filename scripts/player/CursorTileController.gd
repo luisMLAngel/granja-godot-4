@@ -61,6 +61,7 @@ func _actualizar_posicion(jugador: Node) -> void:
 
 	# Muestra el cursor solo si hay algo interactuable frente al jugador
 	sprite.visible = _hay_algo_interactuable(pos_actual)
+	# sprite.visible = true
 
 func _grid_offset_desde_direccion(direccion: Vector2) -> Vector2i:
 	# En lugar de píxeles, devolvemos offsets de 1 coordenada de grilla
@@ -77,8 +78,12 @@ func _actualizar_visual() -> void:
 func _hay_algo_interactuable(pos: Vector2i) -> bool:
 	# El cursor solo se muestra si hay algo con lo que
 	# tenga sentido interactuar en ese tile
-	var estado = tile_system.get_estado(pos)
-	return estado != EstadoTile.OUT_OF_RANGE
+	var info = tile_system.get_tile_info(pos)
+	if info["estado"] == EstadoTile.OCCUPIED:
+		# si hay un objeto se debe mover el cursor justo encima del objeto
+		global_position = tile_system.grid_a_mundo(info["pos"])
+		return true
+	return info["estado"] != EstadoTile.OUT_OF_RANGE
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("action"):

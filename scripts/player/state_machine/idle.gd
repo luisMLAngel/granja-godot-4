@@ -20,7 +20,8 @@ func _on_next_transitions() -> void:
 	if PlayerMovementUtils.is_moving(player.velocity):
 		transition.emit("WalkState")
 	elif InputUtils.is_action_pressed("action"):
-		print("action desde idle")
+		# print("action desde idle")
+		pass
 		# player.tool_component.use_tool()
 
 
