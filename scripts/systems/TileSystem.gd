@@ -154,12 +154,12 @@ func arar(pos: Vector2i) -> void:
 		push_warning("TileSystem: no se puede arar en %s" % pos)
 		return
 
-	layer_terreno.set_cell(pos, SOURCE_ID, ATLAS_TIERRA_ARADA)
+	layer_terreno.set_cells_terrain_connect([pos], 0, 0)
 
 func limpiar_arado(pos: Vector2i) -> void:
 	# Remueve la tierra arada — vuelve a suelo limpio.
 	# Útil si el jugador quiere deshacer el arado.
-	layer_terreno.erase_cell(pos)
+	layer_terreno.set_cells_terrain_connect([pos], 0, -1)
 
 func purificar(pos: Vector2i) -> void:
 	# Purifica un tile corrompido — lo convierte en suelo normal.
