@@ -12,3 +12,6 @@ func _on_health_component_died() -> void:
 
 func _on_health_component_health_changed(current_healt: int) -> void:
 	print("Rock health changed: ", current_healt)
+
+func recibir_interaccion() -> void:
+	print("Rock received interaction")
