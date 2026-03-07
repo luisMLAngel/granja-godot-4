@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dafxsito1pmux"]
+[gd_scene load_steps=10 format=3 uid="uid://dafxsito1pmux"]
 
 [ext_resource type="Script" uid="uid://c2m65x8y1bjsm" path="res://scripts/objects/RockController.gd" id="1_clw6h"]
 [ext_resource type="Texture2D" uid="uid://df748b1xyypp3" path="res://assets/objects/Ground stones.png" id="1_yqmfv"]
 [ext_resource type="Script" uid="uid://boqof4jd52dm0" path="res://scripts/components/HealthComponent.gd" id="3_sildw"]
+[ext_resource type="Script" uid="uid://ccjw752043dwl" path="res://scripts/components/HurtComponent.gd" id="4_sildw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ha8sm"]
 atlas = ExtResource("1_yqmfv")
@@ -36,9 +37,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_clw6h"]
 size = Vector2(11, 6)
 
-[node name="Rock" type="Area2D" node_paths=PackedStringArray("health_component", "anim_sprite")]
+[node name="Rock" type="StaticBody2D" node_paths=PackedStringArray("health_component", "hurt_component", "anim_sprite")]
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_clw6h")
 health_component = NodePath("HealthComponent")
+hurt_component = NodePath("HurtComponent")
 anim_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -53,3 +57,8 @@ script = ExtResource("3_sildw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_clw6h")
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_sildw")
+sprite = NodePath("../AnimatedSprite2D")
+invincibility_time = 1.0

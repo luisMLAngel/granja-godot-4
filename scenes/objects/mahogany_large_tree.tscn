@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://cm63c7c0davbv"]
+
+[ext_resource type="Texture2D" uid="uid://bq65fdythskkr" path="res://assets/trees/Common/No Shadow/Mahogany Tree Animation.png" id="1_pajv5"]
+[ext_resource type="Script" uid="uid://bdnntp44qphk6" path="res://scripts/objects/TreeController.gd" id="1_rtfjn"]
+[ext_resource type="Script" uid="uid://boqof4jd52dm0" path="res://scripts/components/HealthComponent.gd" id="2_x2one"]
+[ext_resource type="Script" uid="uid://ccjw752043dwl" path="res://scripts/components/HurtComponent.gd" id="3_mxnvy"]
+[ext_resource type="PackedScene" uid="uid://2u7b1ye0yitk" path="res://scenes/components/overlap_component.tscn" id="4_mxnvy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72oen"]
+atlas = ExtResource("1_pajv5")
+region = Rect2(0, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2one"]
+atlas = ExtResource("1_pajv5")
+region = Rect2(32, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxnvy"]
+atlas = ExtResource("1_pajv5")
+region = Rect2(64, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtfjn"]
+atlas = ExtResource("1_pajv5")
+region = Rect2(96, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq7dm"]
+atlas = ExtResource("1_pajv5")
+region = Rect2(0, 96, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_76vkv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72oen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2one")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxnvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtfjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq7dm")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2one"]
+size = Vector2(10, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxnvy"]
+size = Vector2(29, 40)
+
+[node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("health_component", "hurt_component", "anim_sprite", "overlap")]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_rtfjn")
+health_component = NodePath("HealthComponent")
+hurt_component = NodePath("HurtComponent")
+anim_sprite = NodePath("AnimatedSprite2D")
+overlap = NodePath("OverlapComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_76vkv")
+animation = &"hurt"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_x2one")
+
+[node name="HurtComponent" type="Node" parent="."]
+script = ExtResource("3_mxnvy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16.5)
+shape = SubResource("RectangleShape2D_x2one")
+
+[node name="OverlapComponent" parent="." instance=ExtResource("4_mxnvy")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OverlapComponent"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_mxnvy")
+debug_color = Color(0.682889, 0.330715, 0.943237, 0.42)

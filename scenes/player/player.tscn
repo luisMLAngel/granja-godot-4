@@ -2151,6 +2151,8 @@ _data = {
 size = Vector2(7.4375, 3.5)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_uf5tr")
 
 [node name="Layers" type="Node2D" parent="."]

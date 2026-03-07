@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://cf6kgwlj30htt"]
+[gd_scene load_steps=11 format=4 uid="uid://cf6kgwlj30htt"]
 
 [ext_resource type="TileSet" uid="uid://i3l7a5s3frr7" path="res://assets/tilesets/ranch.tres" id="1_8s07l"]
 [ext_resource type="Texture2D" uid="uid://bc0n1jow1r5f1" path="res://assets/tilesets/Tilled Soil and wet soil.png" id="2_1psvb"]
 [ext_resource type="PackedScene" uid="uid://cci7n8g3suarw" path="res://scenes/player/player.tscn" id="2_c0gy7"]
 [ext_resource type="PackedScene" uid="uid://dafxsito1pmux" path="res://scenes/objects/simple_rock.tscn" id="3_06aqv"]
 [ext_resource type="Script" uid="uid://dmh83mh2u8owf" path="res://scripts/systems/TileSystem.gd" id="3_r7nt7"]
+[ext_resource type="PackedScene" uid="uid://cm63c7c0davbv" path="res://scenes/objects/mahogany_large_tree.tscn" id="4_htsly"]
 [ext_resource type="Script" uid="uid://bymswimytbiv0" path="res://scripts/player/CursorTileController.gd" id="4_s28k0"]
 [ext_resource type="Texture2D" uid="uid://3nmw8sm67sd2" path="res://assets/UI/Extras.png" id="5_1psvb"]
 
@@ -609,6 +610,10 @@ tile_set = ExtResource("1_8s07l")
 tile_set = SubResource("TileSet_htsly")
 
 [node name="WorldObjects" type="Node2D" parent="."]
+
+[node name="Tree" parent="WorldObjects" instance=ExtResource("4_htsly")]
+position = Vector2(158, 83)
+collision_mask = 15
 
 [node name="Rock" parent="WorldObjects" instance=ExtResource("3_06aqv")]
 

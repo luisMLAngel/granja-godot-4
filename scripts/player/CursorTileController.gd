@@ -10,19 +10,19 @@ extends Node2D
 # ════════════════════════════════════════════════════════════
 
 enum EstadoTile {
-	CORRUPTED,      # Tile de suelo marcado como corrompido.
+	CORRUPTED, # Tile de suelo marcado como corrompido.
 					# No se puede hacer nada hasta purificar.
 
-	OCCUPIED,        # Hay un objeto instanciado encima (árbol, roca,
+	OCCUPIED, # Hay un objeto instanciado encima (árbol, roca,
 					# cultivo, cerca). No se puede interactuar con el suelo.
 
-	EMPTY_WILD,     # Hay pasto liso encima del suelo limpio.
+	EMPTY_WILD, # Hay pasto liso encima del suelo limpio.
 					# El jugador puede removerlo con la hoz.
 
-	CLEAN_GROUND,   # Solo hay suelo, sin pasto ni objetos encima.
+	CLEAN_GROUND, # Solo hay suelo, sin pasto ni objetos encima.
 					# El jugador puede arar aquí.
 
-	TILLED,         # Hay tierra arada (tile en capa Terreno).
+	TILLED, # Hay tierra arada (tile en capa Terreno).
 					# El jugador puede sembrar un cultivo.
 
 	OUT_OF_RANGE, # No hay tile de suelo — fuera del rancho.
@@ -52,17 +52,11 @@ func _actualizar_posicion(jugador: Node) -> void:
 	
 	# 2. Calcula el tile contiguo basado en su dirección
 	var grid_offset = _grid_offset_desde_direccion(jugador.face_direction)
-	var nueva_pos = jugador_grid_pos + grid_offset
-
-	# Solo actualiza el visual si el tile cambió
-	if nueva_pos != pos_actual:
-		pos_actual = nueva_pos
-		# _actualizar_visual()
+	pos_actual = jugador_grid_pos + grid_offset
 
 	# Muestra el cursor solo si hay algo interactuable frente al jugador
 	sprite.visible = _hay_algo_interactuable(pos_actual)
 	global_position = _actualizar_visual(pos_actual)
-	# sprite.visible = true
 
 func _grid_offset_desde_direccion(direccion: Vector2) -> Vector2i:
 	# En lugar de píxeles, devolvemos offsets de 1 coordenada de grilla
@@ -100,11 +94,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Los objetos tienen prioridad sobre los tiles
 	var objeto = _get_objeto_en(pos_actual)
 	if objeto:
-		objeto.recibir_interaccion(tool)
+		objeto.recibir_interaccion(tool )
 		return
 
 	# Si no hay objeto, interactúa con el tile directamente
-	_interactuar_con_tile(pos_actual, tool)
+	_interactuar_con_tile(pos_actual, tool )
 
 func _interactuar_con_tile(pos: Vector2i, tool: ToolController.Tool) -> void:
 	var estado = tile_system.get_estado(pos)
@@ -114,13 +108,13 @@ func _interactuar_con_tile(pos: Vector2i, tool: ToolController.Tool) -> void:
 			# Solo la hoz puede remover pasto
 			if tool == ToolController.Tool.SCYTHE:
 				tile_system.remover_pasto(pos)
-				_animar_jugador(tool) # ver si conviene aqui o en la maquina de estados mejor
+				_animar_jugador(tool ) # ver si conviene aqui o en la maquina de estados mejor
 
 		EstadoTile.CLEAN_GROUND:
 			# Solo la pala puede arar
 			if tool == ToolController.Tool.PICKAXE:
 				tile_system.arar(pos)
-				_animar_jugador(tool)
+				_animar_jugador(tool )
 
 		EstadoTile.TILLED:
 			# Solo semillas pueden sembrar — FarmingSystem lo maneja
@@ -128,13 +122,13 @@ func _interactuar_con_tile(pos: Vector2i, tool: ToolController.Tool) -> void:
 				# EventBus.tile_accion_ejecutada.emit(pos, "sembrar", {
 				# 	"semilla_id": jugador.item_equipado_id
 				# })
-				_animar_jugador(tool)
+				_animar_jugador(tool )
 
 		EstadoTile.CORRUPTED:
 			# Solo el purificador puede limpiar corrupción
 			if tool == ToolController.Tool.HOE:
 				tile_system.purificar(pos)
-				_animar_jugador(tool)
+				_animar_jugador(tool )
 
 func _animar_jugador(tool: ToolController.Tool) -> void:
 	pass
@@ -150,12 +144,12 @@ func _animar_jugador(tool: ToolController.Tool) -> void:
 func _herramienta_a_enum(tool: ToolController.Tool) -> int:
 	var anim_sm = GameManager.player.get_node("AnimationStateMachine")
 	match tool:
-		ToolController.Tool.AXE:       return anim_sm.Herramienta.HACHA
-		ToolController.Tool.PICKAXE:        return anim_sm.Herramienta.PICO
-		ToolController.Tool.SCYTHE:         return anim_sm.Herramienta.PICO
+		ToolController.Tool.AXE: return anim_sm.Herramienta.HACHA
+		ToolController.Tool.PICKAXE: return anim_sm.Herramienta.PICO
+		ToolController.Tool.SCYTHE: return anim_sm.Herramienta.PICO
 		ToolController.Tool.HOE: return anim_sm.Herramienta.PICO
-		ToolController.Tool.WATERING_CAN:    return anim_sm.Herramienta.SEMILLAS
-		_:             return anim_sm.Herramienta.NINGUNA
+		ToolController.Tool.WATERING_CAN: return anim_sm.Herramienta.SEMILLAS
+		_: return anim_sm.Herramienta.NINGUNA
 
 func _get_objeto_en(pos: Vector2i) -> Node:
 	# Busca un objeto instanciado en WorldObjects que ocupe este tile

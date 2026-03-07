@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://2u7b1ye0yitk"]
+
+[ext_resource type="Script" uid="uid://dnuonawka3frh" path="res://scripts/components/OverlapComponent.gd" id="1_dqv6m"]
+
+[node name="OverlapComponent" type="Area2D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_dqv6m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
