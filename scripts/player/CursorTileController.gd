@@ -88,7 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	# Obtiene la herramienta equipada del jugador
-	var tool: ToolController.Tool = jugador.tool_controller.get_tool()
+	var tool: ItemData = jugador.tool_controller.get_tool()
 
 	# Primero busca si hay un objeto instanciado en ese tile
 	# Los objetos tienen prioridad sobre los tiles
@@ -100,56 +100,33 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Si no hay objeto, interactúa con el tile directamente
 	_interactuar_con_tile(pos_actual, tool )
 
-func _interactuar_con_tile(pos: Vector2i, tool: ToolController.Tool) -> void:
+func _interactuar_con_tile(pos: Vector2i, tool: ItemData) -> void:
 	var estado = tile_system.get_estado(pos)
 	print('estado', estado)
+	print('tool', tool )
 	match estado:
 		EstadoTile.EMPTY_WILD:
 			# Solo la hoz puede remover pasto
-			if tool == ToolController.Tool.SCYTHE:
+			if tool.type == ItemData.Tool.SCYTHE:
 				tile_system.remover_pasto(pos)
-				_animar_jugador(tool ) # ver si conviene aqui o en la maquina de estados mejor
 
 		EstadoTile.CLEAN_GROUND:
 			# Solo la pala puede arar
-			if tool == ToolController.Tool.PICKAXE:
+			if tool.type == ItemData.Tool.PICKAXE:
 				tile_system.arar(pos)
-				_animar_jugador(tool )
 
 		EstadoTile.TILLED:
 			# Solo semillas pueden sembrar — FarmingSystem lo maneja
-			if tool == ToolController.Tool.HOE:
+			if tool.type == ItemData.Tool.HOE:
 				# EventBus.tile_accion_ejecutada.emit(pos, "sembrar", {
 				# 	"semilla_id": jugador.item_equipado_id
 				# })
-				_animar_jugador(tool )
+				pass
 
 		EstadoTile.CORRUPTED:
 			# Solo el purificador puede limpiar corrupción
-			if tool == ToolController.Tool.HOE:
+			if tool.type == ItemData.Tool.HOE:
 				tile_system.purificar(pos)
-				_animar_jugador(tool )
-
-func _animar_jugador(tool: ToolController.Tool) -> void:
-	pass
-	# Le dice a la máquina de estados que reproduzca
-	# la animación correspondiente a la herramienta usada
-	# var anim_sm = GameManager.player.get_node("AnimationStateMachine")
-	# var tool_enum = _herramienta_a_enum(tool)
-	# anim_sm.solicitar_estado(
-	# 	anim_sm.Estado.TOOL_USE,
-	# 	tool_enum
-	# )
-
-func _herramienta_a_enum(tool: ToolController.Tool) -> int:
-	var anim_sm = GameManager.player.get_node("AnimationStateMachine")
-	match tool:
-		ToolController.Tool.AXE: return anim_sm.Herramienta.HACHA
-		ToolController.Tool.PICKAXE: return anim_sm.Herramienta.PICO
-		ToolController.Tool.SCYTHE: return anim_sm.Herramienta.PICO
-		ToolController.Tool.HOE: return anim_sm.Herramienta.PICO
-		ToolController.Tool.WATERING_CAN: return anim_sm.Herramienta.SEMILLAS
-		_: return anim_sm.Herramienta.NINGUNA
 
 func _get_objeto_en(pos: Vector2i) -> Node:
 	# Busca un objeto instanciado en WorldObjects que ocupe este tile
@@ -158,6 +135,8 @@ func _get_objeto_en(pos: Vector2i) -> Node:
 		return null
 
 	for objeto in world_objects.get_children():
+		print('objeto', objeto)
+		print('global pos', objeto.global_position)
 		if not objeto.has_method("recibir_interaccion"):
 			continue
 

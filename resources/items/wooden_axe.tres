@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dhsqg7nks3yvp"]
+
+[ext_resource type="Script" uid="uid://babelaqhrob0h" path="res://resources/items/ItemData.gd" id="1_racgd"]
+[ext_resource type="Texture2D" uid="uid://ddlpcdr2uy4vh" path="res://assets/weapons/1.png" id="2_20oiq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd2ww"]
+atlas = ExtResource("2_20oiq")
+region = Rect2(96, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_racgd")
+name = "Hacha de madera"
+damage = 15
+hitbox_size = Vector2(16, 16)
+hitbox_offset = Vector2(12, 0)
+sprite_texture = SubResource("AtlasTexture_bd2ww")
+type = "AXE"

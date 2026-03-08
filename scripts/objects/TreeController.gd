@@ -4,18 +4,24 @@ class_name TreeController extends Node2D
 @export var hurt_component: HurtComponent
 @export var anim_sprite: AnimatedSprite2D
 @export var overlap: OverlapComponent
+@export var interaction_component: InteractionComponent
 
 func _ready() -> void:
 	health_component.died.connect(_on_health_component_died)
 	health_component.health_changed.connect(_on_health_component_health_changed)
 	overlap.overlapping.connect(_on_overlapping)
+	interaction_component.in_interactable_zone.connect(_on_in_interactable_zone)
+
+func _on_in_interactable_zone(value: bool) -> void:
+	print('PRECIONA la tecla p para talar')
+	
 
 func _on_health_component_died() -> void:
 	print("Rock died")
 
 func _on_health_component_health_changed(current_healt: int) -> void:
 	print("Rock health changed: ", current_healt)
-	hurt_component.on_hurt(current_healt)
+	hurt_component.on_hurt()
 	# reproducir sonido de golpe
 
 func _on_overlapping(value: bool) -> void:

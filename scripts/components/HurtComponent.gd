@@ -7,7 +7,7 @@ class_name HurtComponent extends Node
 
 var _can_be_hurt: bool = true
 
-func on_hurt(_current_health: int) -> void:
+func on_hurt() -> void:
 	_flash()
 	if invincibility_time > 0:
 		_start_invincibility()

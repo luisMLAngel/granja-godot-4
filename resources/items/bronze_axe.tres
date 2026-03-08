@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dmdpnomqft1ci"]
+
+[ext_resource type="Script" uid="uid://babelaqhrob0h" path="res://resources/items/ItemData.gd" id="1_erxnw"]
+[ext_resource type="Texture2D" uid="uid://yyc3veehfycn" path="res://assets/weapons/2.png" id="2_dhrku"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al4sv"]
+atlas = ExtResource("2_dhrku")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_erxnw")
+name = ""
+damage = 25
+hitbox_size = Vector2(16, 16)
+hitbox_offset = Vector2(12, 0)
+sprite_texture = SubResource("AtlasTexture_al4sv")
+type = ""

@@ -612,7 +612,7 @@ tile_set = SubResource("TileSet_htsly")
 [node name="WorldObjects" type="Node2D" parent="."]
 
 [node name="Tree" parent="WorldObjects" instance=ExtResource("4_htsly")]
-position = Vector2(158, 83)
+position = Vector2(12, 86)
 collision_mask = 15
 
 [node name="Rock" parent="WorldObjects" instance=ExtResource("3_06aqv")]
