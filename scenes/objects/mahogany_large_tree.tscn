@@ -63,7 +63,7 @@ size = Vector2(20, 35)
 
 [sub_resource type="Resource" id="Resource_1v75t"]
 script = ExtResource("8_1v75t")
-label = "Talar"
+label = "Talar árbol de caoba"
 action = "action"
 metadata/_custom_type_script = "uid://cecryok6mvone"
 

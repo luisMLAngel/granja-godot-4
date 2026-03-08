@@ -9,8 +9,8 @@ class_name InteractionHUD extends CanvasLayer
 # ════════════════════════════════════════════════════════════
 
 @onready var panel: PanelContainer = $Panel
-@onready var key_label: Label = $Panel/HBoxContainer/Control/KeyLabel
-@onready var action_label: Label = $Panel/HBoxContainer/Control/ActionLabel
+@onready var key_label: Label = $Panel/HBoxContainer/KeyLabel
+@onready var action_label: Label = $Panel/HBoxContainer/ActionLabel
 
 func _ready() -> void:
 	panel.modulate.a = 0.0
