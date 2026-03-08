@@ -1,18 +1,25 @@
 class_name InteractableComponent extends Area2D
 
-signal in_interactable_zone(value: bool)
+# ════════════════════════════════════════════════════════════
+# INTERACTABLE COMPONENT
+#
+# Detecta cuando el jugador entra o sale del área de interacción.
+# Emite señales al EventBus para que el HUD muestre el tooltip.
+# Configura el InteractionData en el editor por cada objeto.
+# ════════════════════════════════════════════════════════════
+
+@export var data: InteractionData
 
 func _ready() -> void:
+	print('interactable ready')
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
-		print('emite')
-		in_interactable_zone.emit(true)
-
+		print('emite interactable')
+		EventBus.interaction_prompt_show.emit(data)
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is PlayerController:
-		print('sale')
-	    in_interactable_zone.emit(false)
+		EventBus.interaction_prompt_hide.emit()

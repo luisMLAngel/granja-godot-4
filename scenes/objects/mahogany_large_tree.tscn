@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cm63c7c0davbv"]
+[gd_scene load_steps=20 format=3 uid="uid://cm63c7c0davbv"]
 
 [ext_resource type="Texture2D" uid="uid://bq65fdythskkr" path="res://assets/trees/Common/No Shadow/Mahogany Tree Animation.png" id="1_pajv5"]
 [ext_resource type="Script" uid="uid://bdnntp44qphk6" path="res://scripts/objects/TreeController.gd" id="1_rtfjn"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dvqyc4bg433n1" path="res://scenes/components/hurtbox_component.tscn" id="4_76vkv"]
 [ext_resource type="PackedScene" uid="uid://2u7b1ye0yitk" path="res://scenes/components/overlap_component.tscn" id="4_mxnvy"]
 [ext_resource type="PackedScene" uid="uid://dlabevv674ir" path="res://scenes/components/interactable_component.tscn" id="7_76vkv"]
+[ext_resource type="Script" uid="uid://cecryok6mvone" path="res://resources/InteractionData.gd" id="8_1v75t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_72oen"]
 atlas = ExtResource("1_pajv5")
@@ -60,14 +61,21 @@ size = Vector2(10, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxnvy"]
 size = Vector2(20, 35)
 
+[sub_resource type="Resource" id="Resource_1v75t"]
+script = ExtResource("8_1v75t")
+label = "Talar"
+action = "action"
+metadata/_custom_type_script = "uid://cecryok6mvone"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1v75t"]
-height = 20.0
+radius = 18.0
+height = 36.0
 
 [node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("health_component", "hurt_component", "anim_sprite", "overlap")]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_rtfjn")
-health_component = NodePath("")
+health_component = NodePath("HealthComponent")
 hurt_component = NodePath("HurtComponent")
 anim_sprite = NodePath("AnimatedSprite2D")
 overlap = NodePath("OverlapComponent")
@@ -100,8 +108,11 @@ shape = SubResource("RectangleShape2D_mxnvy")
 debug_color = Color(0.682889, 0.330715, 0.943237, 0.42)
 
 [node name="InteractableComponent" parent="." instance=ExtResource("7_76vkv")]
+collision_layer = 8
+collision_mask = 7
+data = SubResource("Resource_1v75t")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractableComponent"]
-position = Vector2(0, 15)
+position = Vector2(-1, 5)
 shape = SubResource("CapsuleShape2D_1v75t")
 debug_color = Color(0.956863, 0.529412, 0, 0.419608)

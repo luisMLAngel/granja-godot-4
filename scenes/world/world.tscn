@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://jgn6rkwgwc4s"]
+[gd_scene load_steps=5 format=3 uid="uid://jgn6rkwgwc4s"]
 
 [ext_resource type="PackedScene" uid="uid://bwr8rsogcv8py" path="res://scenes/ui/UI.tscn" id="1_6m72w"]
-[ext_resource type="PackedScene" uid="uid://cci7n8g3suarw" path="res://scenes/player/player.tscn" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://cf6kgwlj30htt" path="res://scenes/world/ranch.tscn" id="1_v5dby"]
 [ext_resource type="Script" uid="uid://cqcc3q5r7t703" path="res://scripts/world/DayNightSystem.gd" id="2_sl2e5"]
 [ext_resource type="Script" uid="uid://ci0kfqu7a8i2g" path="res://scripts/world/CanvasModulateColor.gd" id="3_1fp7r"]
@@ -11,9 +10,6 @@
 [node name="CanvasLayer" parent="." instance=ExtResource("1_6m72w")]
 
 [node name="Ranch" parent="." instance=ExtResource("1_v5dby")]
-
-[node name="Player" parent="." instance=ExtResource("1_dphjl")]
-position = Vector2(82, 64)
 
 [node name="DayNightSystem" type="Node" parent="."]
 script = ExtResource("2_sl2e5")

@@ -13,7 +13,7 @@ func _on_health_component_died() -> void:
 
 func _on_health_component_health_changed(current_healt: int) -> void:
 	print("Rock health changed: ", current_healt)
-	hurt_component.on_hurt(current_healt)
+	hurt_component.on_hurt()
 	# reproducir sonido de golpe
 
 func recibir_interaccion(tool: ToolController.Tool) -> void:

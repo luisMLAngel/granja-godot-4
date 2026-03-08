@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=3 uid="uid://40xa7ldkei4q"]
+
+[ext_resource type="Script" uid="uid://b3rcq8jc45jec" path="res://scripts/ui/InteractionHUD.gd" id="1_hud"]
+[ext_resource type="FontFile" uid="uid://277ym1ts6ih1" path="res://assets/fonts/04B_03__.TTF" id="2_ycbt6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.08, 0.06, 0.12, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6, 0.501961, 1, 0.0784314)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.6, 0.501961, 1, 0.0784314)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_key"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="InteractionHUD" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -64.0
+offset_right = 23.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Control" type="Control" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="KeyLabel" type="Label" parent="Panel/HBoxContainer/Control"]
+layout_mode = 2
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 14.0
+offset_bottom = 6.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ycbt6")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_key")
+text = "E"
+
+[node name="ActionLabel" type="Label" parent="Panel/HBoxContainer/Control"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 69.0
+offset_bottom = 4.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ycbt6")
+theme_override_font_sizes/font_size = 8
+text = "Interactuar"

@@ -135,8 +135,6 @@ func _get_objeto_en(pos: Vector2i) -> Node:
 		return null
 
 	for objeto in world_objects.get_children():
-		print('objeto', objeto)
-		print('global pos', objeto.global_position)
 		if not objeto.has_method("recibir_interaccion"):
 			continue
 

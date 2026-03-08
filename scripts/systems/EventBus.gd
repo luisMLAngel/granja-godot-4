@@ -34,3 +34,7 @@ signal dialogue_finished(npc_id: String)
 # ── Combate ──────────────────────────────────────────────────
 signal player_damaged(cantidad: float)
 signal enemy_killed(enemy_id: String, posicion: Vector2)
+
+# ── Interacción ──────────────────────────────────────────────
+signal interaction_prompt_show(data: InteractionData)
+signal interaction_prompt_hide()
