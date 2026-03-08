@@ -4,13 +4,22 @@ class_name TreeController extends Node2D
 @export var hurt_component: HurtComponent
 @export var anim_sprite: AnimatedSprite2D
 @export var overlap: OverlapComponent
+@export var hurtbox: HurtboxComponent
 # InteractableComponent se conecta solo al EventBus — no necesita código aquí
 
 func _ready() -> void:
 	health_component.died.connect(_on_health_component_died)
 	health_component.health_changed.connect(_on_health_component_health_changed)
+	hurtbox.hurt.connect(_on_hurtbox_hurt)
 	overlap.overlapping.connect(_on_overlapping)
 
+func _on_hurtbox_hurt(tool: ToolController) -> void:
+	if not tool:
+		return
+	if tool.get_tool_type() == "Axe":
+		health_component.take_damage(tool.damage)
+	else:
+		print('Me la pela con lo que interactuas, no es una hacha')
 
 func _on_health_component_died() -> void:
 	print("Rock died")

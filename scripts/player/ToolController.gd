@@ -17,6 +17,16 @@ func set_tool(tool: ItemData) -> void:
 func get_tool() -> ItemData:
 	return current_tool
 
+func get_tool_type() -> String:
+	match current_tool.type:
+		Tool.HOE: return "Hoe"
+		Tool.PICKAXE: return "Pickaxe"
+		Tool.AXE: return "Axe"
+		Tool.WATERING_CAN: return "WateringCan"
+		Tool.SCYTHE: return "Scythe"
+		Tool.NONE: return "none"
+		_: return "none"
+
 func get_tool_name() -> String:
 	match current_tool.type:
 		Tool.HOE: return "azada"

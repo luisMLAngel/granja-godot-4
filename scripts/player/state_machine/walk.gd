@@ -19,8 +19,6 @@ func _on_physics_process(_delta: float) -> void:
 func _on_next_transitions() -> void:
 	if !PlayerMovementUtils.is_moving(player.velocity):
 		transition.emit("IdleState")
-	elif InputUtils.is_action_pressed("action"):
-		player.tool_component.use_tool()
 
 
 func _on_enter() -> void:

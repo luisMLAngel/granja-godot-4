@@ -20,9 +20,9 @@ func _on_next_transitions() -> void:
 	if PlayerMovementUtils.is_moving(player.velocity):
 		transition.emit("WalkState")
 	elif InputUtils.is_action_pressed("action"):
-		# print("action desde idle")
-		pass
-		# player.tool_component.use_tool()
+		var current_tool_type = player.tool_controller.get_tool_type()
+		print("Current Tool Type: ", current_tool_type)
+		transition.emit(current_tool_type + "State")
 
 
 func _on_enter() -> void:

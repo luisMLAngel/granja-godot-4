@@ -34,7 +34,11 @@ enum EstadoTile {
 # Posición actual del cursor en coordenadas de grid
 var pos_actual: Vector2i = Vector2i.ZERO
 
+var blocked_by_interaction: bool = false
+
 func _ready() -> void:
+	EventBus.interaction_prompt_show.connect(_show_interaction_prompt)
+	EventBus.interaction_prompt_hide.connect(_hide_interaction_prompt)
 	sprite.position = Vector2.ZERO
 	sprite.visible = false
 
@@ -55,8 +59,9 @@ func _actualizar_posicion(jugador: Node) -> void:
 	pos_actual = jugador_grid_pos + grid_offset
 
 	# Muestra el cursor solo si hay algo interactuable frente al jugador
-	sprite.visible = _hay_algo_interactuable(pos_actual)
-	global_position = _actualizar_visual(pos_actual)
+	if !blocked_by_interaction:
+		sprite.visible = _hay_algo_interactuable(pos_actual)
+		global_position = _actualizar_visual(pos_actual)
 
 func _grid_offset_desde_direccion(direccion: Vector2) -> Vector2i:
 	# En lugar de píxeles, devolvemos offsets de 1 coordenada de grilla
@@ -71,12 +76,14 @@ func _hay_algo_interactuable(pos: Vector2i) -> bool:
 	# El cursor solo se muestra si hay algo con lo que
 	# tenga sentido interactuar en ese tile
 	var estado = tile_system.get_estado(pos)
-	return estado != EstadoTile.OUT_OF_RANGE
+	print('estado ->', estado)
+	return estado != EstadoTile.OUT_OF_RANGE && estado != EstadoTile.OCCUPIED
 
 func _actualizar_visual(pos: Vector2i) -> Vector2:
-	var objeto = _get_objeto_en(pos)
-	if objeto:
-		return objeto.global_position
+	# var objeto = _get_objeto_en(pos)
+	# if objeto:
+	# 	sprite.visible = false
+	# 	return objeto.global_position
 	return tile_system.grid_a_mundo(pos)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -92,10 +99,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# Primero busca si hay un objeto instanciado en ese tile
 	# Los objetos tienen prioridad sobre los tiles
-	var objeto = _get_objeto_en(pos_actual)
-	if objeto:
-		objeto.recibir_interaccion(tool )
-		return
+	# var objeto = _get_objeto_en(pos_actual)
+	# if objeto:
+	# 	objeto.recibir_interaccion(tool )
+	# 	return
 
 	# Si no hay objeto, interactúa con el tile directamente
 	_interactuar_con_tile(pos_actual, tool )
@@ -148,3 +155,12 @@ func _get_objeto_en(pos: Vector2i) -> Node:
 				return objeto
 
 	return null
+
+func _show_interaction_prompt(data: InteractionData) -> void:
+	print("Show interaction prompt")
+	blocked_by_interaction = true
+	sprite.visible = false
+
+func _hide_interaction_prompt() -> void:
+	print("Hide interaction prompt")
+	blocked_by_interaction = false

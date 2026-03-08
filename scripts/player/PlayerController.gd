@@ -5,6 +5,7 @@ class_name PlayerController extends CharacterBody2D
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var tool_controller: ToolController = $CurrentTool
+@onready var hitbox: HitboxComponent = $HitboxComponent
 
 var can_move: bool = true
 var direction: Vector2 = Vector2.ZERO
@@ -35,6 +36,7 @@ func _read_input() -> void:
 
 	if direction != Vector2.ZERO:
 		face_direction = direction
+	
 
 func _apply_movement() -> void:
 	velocity = direction * base_speed * _energy_modifier()
@@ -72,3 +74,6 @@ func _on_dialogue_started(_npc_id: String) -> void:
 
 func _on_dialogue_finished(_npc_id: String) -> void:
 	can_move = true
+
+func set_can_move(value: bool) -> void:
+	can_move = value

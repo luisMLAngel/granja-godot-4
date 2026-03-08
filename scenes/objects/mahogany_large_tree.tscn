@@ -68,8 +68,8 @@ action = "action"
 metadata/_custom_type_script = "uid://cecryok6mvone"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1v75t"]
-radius = 18.0
-height = 36.0
+radius = 22.0
+height = 44.0
 
 [node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("health_component", "hurt_component", "anim_sprite", "overlap")]
 collision_layer = 8

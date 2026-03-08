@@ -10,19 +10,19 @@ class_name TileSystem extends Node
 # ════════════════════════════════════════════════════════════
 
 enum EstadoTile {
-	CORRUPTED,      # Tile de suelo marcado como corrompido.
+	CORRUPTED, # Tile de suelo marcado como corrompido.
 	                # No se puede hacer nada hasta purificar.
 
-	OCCUPIED,        # Hay un objeto instanciado encima (árbol, roca,
+	OCCUPIED, # Hay un objeto instanciado encima (árbol, roca,
 	                # cultivo, cerca). No se puede interactuar con el suelo.
 
-	EMPTY_WILD,     # Hay pasto liso encima del suelo limpio.
+	EMPTY_WILD, # Hay pasto liso encima del suelo limpio.
 	                # El jugador puede removerlo con la hoz.
 
-	CLEAN_GROUND,   # Solo hay suelo, sin pasto ni objetos encima.
+	CLEAN_GROUND, # Solo hay suelo, sin pasto ni objetos encima.
 	                # El jugador puede arar aquí.
 
-	TILLED,         # Hay tierra arada (tile en capa Terreno).
+	TILLED, # Hay tierra arada (tile en capa Terreno).
 	                # El jugador puede sembrar un cultivo.
 
 	OUT_OF_RANGE, # No hay tile de suelo — fuera del rancho.
@@ -35,12 +35,12 @@ enum EstadoTile {
 # Si cambias la estructura de nodos, solo actualizas estas rutas.
 # ════════════════════════════════════════════════════════════
 
-@export var layer_suelo:    TileMapLayer
-@export var layer_pasto:    TileMapLayer
-@export var layer_elevaciones:    TileMapLayer
-@export var layer_suelo_elevaciones:    TileMapLayer
-@export var layer_pasto_deco:     TileMapLayer
-@export var layer_terreno:  TileMapLayer
+@export var layer_suelo: TileMapLayer
+@export var layer_pasto: TileMapLayer
+@export var layer_elevaciones: TileMapLayer
+@export var layer_suelo_elevaciones: TileMapLayer
+@export var layer_pasto_deco: TileMapLayer
+@export var layer_terreno: TileMapLayer
 
 # Contenedor de todos los objetos instanciados en el mundo.
 # Se usa para detectar si hay un objeto ocupando un tile.
@@ -77,7 +77,6 @@ func get_estado(pos: Vector2i) -> EstadoTile:
 	# Calcula el estado real del tile leyendo las capas.
 	# Se llama cada vez que el jugador selecciona un tile —
 	# no hay estado cacheado que pueda quedar desactualizado.
-
 	# Sin tile de suelo = fuera del área del rancho
 	if layer_suelo.get_cell_source_id(pos) == -1:
 		return EstadoTile.OUT_OF_RANGE
@@ -107,8 +106,8 @@ func get_tile_info(pos: Vector2i) -> Dictionary:
 	# Se emite en tile_seleccionado para que la UI lo muestre.
 	var estado = get_estado(pos)
 	return {
-		"pos":      pos,
-		"estado":   estado,
+		"pos": pos,
+		"estado": estado,
 		"acciones": 'Las define el objeto o tile',
 	}
 
@@ -149,7 +148,6 @@ func remover_pasto(pos: Vector2i) -> void:
 func arar(pos: Vector2i) -> void:
 	# Coloca un tile de tierra arada en la capa Terreno.
 	# Solo válido sobre suelo limpio (sin pasto ni objetos).
-
 	if get_estado(pos) != EstadoTile.CLEAN_GROUND:
 		push_warning("TileSystem: no se puede arar en %s" % pos)
 		return
@@ -164,7 +162,6 @@ func limpiar_arado(pos: Vector2i) -> void:
 func purificar(pos: Vector2i) -> void:
 	# Purifica un tile corrompido — lo convierte en suelo normal.
 	# En el futuro esto puede requerir un item específico.
-
 	if get_estado(pos) != EstadoTile.CORRUPTED:
 		push_warning("TileSystem: el tile %s no está corrompido" % pos)
 		return
@@ -244,14 +241,14 @@ func get_save_data() -> Dictionary:
 	for pos in layer_suelo.get_used_cells():
 		var data = layer_suelo.get_cell_tile_data(pos)
 		if data and data.get_custom_data("tile_state") == "CORRUPTED":
-			corrompidos.append({ "x": pos.x, "y": pos.y })
+			corrompidos.append({"x": pos.x, "y": pos.y})
 
 	for pos in layer_terreno.get_used_cells():
-		arados.append({ "x": pos.x, "y": pos.y })
+		arados.append({"x": pos.x, "y": pos.y})
 
 	return {
 		"corrompidos": corrompidos,
-		"arados":      arados,
+		"arados": arados,
 	}
 
 func load_save_data(data: Dictionary) -> void:
