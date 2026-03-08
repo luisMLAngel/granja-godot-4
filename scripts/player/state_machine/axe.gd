@@ -22,7 +22,6 @@ func _on_next_transitions() -> void:
 
 func _on_enter() -> void:
 	animation_finished = false
-	print("Axe State")
 	if player.face_direction == Vector2.DOWN:
 		player.animation_player.play('tool_axe_down')
 	elif player.face_direction == Vector2.UP:

@@ -13,10 +13,15 @@ func _ready() -> void:
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
 	overlap.overlapping.connect(_on_overlapping)
 
-func _on_hurtbox_hurt(tool: ToolController) -> void:
+func _on_hurtbox_hurt(toolController: ToolController) -> void:
+	var tool = toolController.get_tool()
+	print('hurt current tool', tool )
 	if not tool:
 		return
-	if tool.get_tool_type() == "Axe":
+	print(tool.name)
+	print(tool.damage)
+	if tool.type == ToolController.Tool.AXE:
+		anim_sprite.play("hurt")
 		health_component.take_damage(tool.damage)
 	else:
 		print('Me la pela con lo que interactuas, no es una hacha')

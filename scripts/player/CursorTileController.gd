@@ -76,7 +76,6 @@ func _hay_algo_interactuable(pos: Vector2i) -> bool:
 	# El cursor solo se muestra si hay algo con lo que
 	# tenga sentido interactuar en ese tile
 	var estado = tile_system.get_estado(pos)
-	print('estado ->', estado)
 	return estado != EstadoTile.OUT_OF_RANGE && estado != EstadoTile.OCCUPIED
 
 func _actualizar_visual(pos: Vector2i) -> Vector2:
