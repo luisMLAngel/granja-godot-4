@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://c6wp4c1xo7e3r"]
+
+[ext_resource type="Script" uid="uid://babelaqhrob0h" path="res://resources/items/ItemData.gd" id="1_222g7"]
+
+[resource]
+script = ExtResource("1_222g7")
+name = "None"
+damage = 0
+hitbox_size = Vector2(16, 16)
+hitbox_offset = Vector2(12, 0)
+type = 5
+metadata/_custom_type_script = "uid://babelaqhrob0h"

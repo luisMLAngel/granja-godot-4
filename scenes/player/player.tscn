@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://bu0cn0d5j6yck" path="res://scripts/player/state_machine/walk.gd" id="20_8ydkj"]
 [ext_resource type="Script" uid="uid://b2wqo88yedyb1" path="res://scripts/player/ToolController.gd" id="21_3j4b4"]
 [ext_resource type="Script" uid="uid://bmhyqn3gwqtrk" path="res://scripts/player/state_machine/axe.gd" id="21_yj68g"]
-[ext_resource type="Resource" uid="uid://dhsqg7nks3yvp" path="res://resources/items/wooden_axe.tres" id="23_ioxgp"]
+[ext_resource type="Resource" uid="uid://c6wp4c1xo7e3r" path="res://resources/items/none.tres" id="23_cnsyf"]
 [ext_resource type="PackedScene" uid="uid://vvpkut3y7kya" path="res://scenes/components/hitbox_component.tscn" id="24_cnsyf"]
 
 [sub_resource type="Animation" id="Animation_smehm"]
@@ -242,6 +242,42 @@ tracks/17/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [24]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("HitboxComponent:monitorable")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("HitboxComponent/CollisionShape2D:position")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-10, -11)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("HitboxComponent:monitoring")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_fjrip"]
@@ -1323,6 +1359,18 @@ tracks/19/keys = {
 "update": 0,
 "values": [Vector2(0, -4)]
 }
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("HitboxComponent:monitorable")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0.666983, 0.883336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_007i1"]
 resource_name = "tool_axe_left"
@@ -1550,7 +1598,7 @@ tracks/18/path = NodePath("HitboxComponent:monitoring")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0.6685, 0.885897),
+"times": PackedFloat32Array(0.264361, 0.333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1562,10 +1610,22 @@ tracks/19/path = NodePath("HitboxComponent/CollisionShape2D:position")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
-"times": PackedFloat32Array(0.6685),
+"times": PackedFloat32Array(0.264361),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-10, -11)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("HitboxComponent:monitorable")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0.264361, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_cnsyf"]
@@ -2927,7 +2987,7 @@ script = ExtResource("21_yj68g")
 
 [node name="CurrentTool" type="Node" parent="."]
 script = ExtResource("21_3j4b4")
-current_tool = ExtResource("23_ioxgp")
+current_tool = ExtResource("23_cnsyf")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("current_tool") instance=ExtResource("24_cnsyf")]
 position = Vector2(0, 15)
@@ -2938,7 +2998,7 @@ hitbox_offset = Vector2(55, 0)
 current_tool = NodePath("../CurrentTool")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, -4)
+position = Vector2(-10, -11)
 shape = SubResource("RectangleShape2D_cnsyf")
 debug_color = Color(0, 0, 0, 0.42)
 
