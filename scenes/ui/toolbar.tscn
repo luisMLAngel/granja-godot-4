@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ksssb0rlp5qu"]
+
+[ext_resource type="Theme" uid="uid://djpb0vknvn7jg" path="res://scenes/ui/game_ui_theme.tres" id="1_q4dmc"]
+
+[node name="Toolbar" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(447, 549)
+theme = ExtResource("1_q4dmc")
+theme_type_variation = &"DarkWoodPanel"

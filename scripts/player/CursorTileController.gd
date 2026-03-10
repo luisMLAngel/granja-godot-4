@@ -1,4 +1,4 @@
-extends Node2D
+class_name CursorTileController extends Area2D
 
 # ════════════════════════════════════════════════════════════
 # TILE CURSOR
@@ -29,6 +29,7 @@ enum EstadoTile {
 }
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @export var tile_system: TileSystem
 
 # Posición actual del cursor en coordenadas de grid
@@ -40,6 +41,7 @@ func _ready() -> void:
 	EventBus.interaction_prompt_show.connect(_show_interaction_prompt)
 	EventBus.interaction_prompt_hide.connect(_hide_interaction_prompt)
 	sprite.position = Vector2.ZERO
+	collision_shape.position = Vector2.ZERO
 	sprite.visible = false
 
 func _process(_delta: float) -> void:
@@ -159,7 +161,10 @@ func _show_interaction_prompt(data: InteractionData) -> void:
 	print("Show interaction prompt")
 	blocked_by_interaction = true
 	sprite.visible = false
+	collision_shape.disabled = true
 
 func _hide_interaction_prompt() -> void:
 	print("Hide interaction prompt")
 	blocked_by_interaction = false
+	sprite.visible = true
+	collision_shape.disabled = false

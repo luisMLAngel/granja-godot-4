@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cf6kgwlj30htt"]
+[gd_scene load_steps=11 format=4 uid="uid://cf6kgwlj30htt"]
 
 [ext_resource type="TileSet" uid="uid://i3l7a5s3frr7" path="res://assets/tilesets/ranch.tres" id="1_8s07l"]
 [ext_resource type="Texture2D" uid="uid://bc0n1jow1r5f1" path="res://assets/tilesets/Tilled Soil and wet soil.png" id="2_1psvb"]
@@ -6,8 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dafxsito1pmux" path="res://scenes/objects/simple_rock.tscn" id="3_06aqv"]
 [ext_resource type="Script" uid="uid://dmh83mh2u8owf" path="res://scripts/systems/TileSystem.gd" id="3_r7nt7"]
 [ext_resource type="PackedScene" uid="uid://cm63c7c0davbv" path="res://scenes/objects/mahogany_large_tree.tscn" id="4_htsly"]
-[ext_resource type="Script" uid="uid://bymswimytbiv0" path="res://scripts/player/CursorTileController.gd" id="4_s28k0"]
-[ext_resource type="Texture2D" uid="uid://3nmw8sm67sd2" path="res://assets/UI/Extras.png" id="5_1psvb"]
+[ext_resource type="PackedScene" uid="uid://bk4sbti86ym13" path="res://scenes/components/tile_cursor.tscn" id="7_htsly"]
 [ext_resource type="PackedScene" uid="uid://40xa7ldkei4q" path="res://scenes/ui/InteractionHUD.tscn" id="9_lod71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_06aqv"]
@@ -631,16 +630,8 @@ layer_pasto_deco = NodePath("../PastoDecorativo")
 layer_terreno = NodePath("../Terreno")
 world_objects = NodePath("../WorldObjects")
 
-[node name="TileCursor" type="Node2D" parent="." node_paths=PackedStringArray("tile_system")]
+[node name="TileCursor" parent="." node_paths=PackedStringArray("tile_system") instance=ExtResource("7_htsly")]
 position = Vector2(9, -8)
-script = ExtResource("4_s28k0")
 tile_system = NodePath("../TileSystem")
-
-[node name="Sprite2D" type="Sprite2D" parent="TileCursor"]
-position = Vector2(45.5, 108.5)
-scale = Vector2(0.576923, 0.576923)
-texture = ExtResource("5_1psvb")
-region_enabled = true
-region_rect = Rect2(187, 11, 26, 26)
 
 [node name="InteractionHUD" parent="." instance=ExtResource("9_lod71")]

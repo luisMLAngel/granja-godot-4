@@ -68,9 +68,8 @@ label = "Talar árbol de caoba"
 action = "action"
 metadata/_custom_type_script = "uid://cecryok6mvone"
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1v75t"]
-radius = 22.0
-height = 44.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66iaf"]
+size = Vector2(20, 14)
 
 [node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("health_component", "hurt_component", "anim_sprite", "overlap", "hurtbox")]
 collision_layer = 8
@@ -89,11 +88,13 @@ animation = &"hurt"
 [node name="HealthComponent" parent="." instance=ExtResource("3_yq7dm")]
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("4_76vkv")]
+visible = false
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("5_66iaf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+visible = false
 position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_1v75t")
 debug_color = Color(0.960784, 0, 0, 0.419608)
@@ -102,12 +103,14 @@ debug_color = Color(0.960784, 0, 0, 0.419608)
 script = ExtResource("3_mxnvy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 16.5)
 shape = SubResource("RectangleShape2D_x2one")
 
 [node name="OverlapComponent" parent="." instance=ExtResource("4_mxnvy")]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="OverlapComponent"]
+visible = false
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_mxnvy")
 debug_color = Color(0.682889, 0.330715, 0.943237, 0.42)
@@ -118,6 +121,6 @@ collision_mask = 7
 data = SubResource("Resource_1v75t")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractableComponent"]
-position = Vector2(-1, 5)
-shape = SubResource("CapsuleShape2D_1v75t")
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_66iaf")
 debug_color = Color(0.956863, 0.529412, 0, 0.419608)

@@ -11,15 +11,23 @@ class_name InteractableComponent extends Area2D
 @export var data: InteractionData
 
 func _ready() -> void:
-	print('interactable ready')
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
-		print('emite interactable')
 		EventBus.interaction_prompt_show.emit(data)
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is PlayerController:
+		EventBus.interaction_prompt_hide.emit()
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is CursorTileController:
+		EventBus.interaction_prompt_show.emit(data)
+
+func _on_area_exited(area: Area2D) -> void:
+	if area is CursorTileController:
 		EventBus.interaction_prompt_hide.emit()

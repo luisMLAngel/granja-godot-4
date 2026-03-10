@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk4sbti86ym13"]
+
+[ext_resource type="Script" uid="uid://bymswimytbiv0" path="res://scripts/player/CursorTileController.gd" id="1_0wgoa"]
+[ext_resource type="Texture2D" uid="uid://3nmw8sm67sd2" path="res://assets/UI/Extras.png" id="2_hm8kb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lod71"]
+size = Vector2(15, 15)
+
+[node name="TileCursor" type="Area2D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_0wgoa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(45.5, 108.5)
+scale = Vector2(0.576923, 0.576923)
+texture = ExtResource("2_hm8kb")
+region_enabled = true
+region_rect = Rect2(187, 11, 26, 26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(45.5, 108.5)
+shape = SubResource("RectangleShape2D_lod71")
