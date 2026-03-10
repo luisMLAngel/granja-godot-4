@@ -88,13 +88,11 @@ animation = &"hurt"
 [node name="HealthComponent" parent="." instance=ExtResource("3_yq7dm")]
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("4_76vkv")]
-visible = false
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("5_66iaf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-visible = false
 position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_1v75t")
 debug_color = Color(0.960784, 0, 0, 0.419608)
@@ -103,14 +101,12 @@ debug_color = Color(0.960784, 0, 0, 0.419608)
 script = ExtResource("3_mxnvy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 16.5)
 shape = SubResource("RectangleShape2D_x2one")
 
 [node name="OverlapComponent" parent="." instance=ExtResource("4_mxnvy")]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="OverlapComponent"]
-visible = false
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_mxnvy")
 debug_color = Color(0.682889, 0.330715, 0.943237, 0.42)

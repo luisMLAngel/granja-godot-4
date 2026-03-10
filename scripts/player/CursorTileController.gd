@@ -61,9 +61,13 @@ func _actualizar_posicion(jugador: Node) -> void:
 	pos_actual = jugador_grid_pos + grid_offset
 
 	# Muestra el cursor solo si hay algo interactuable frente al jugador
-	if !blocked_by_interaction:
+	# y no estamos bloqueados por una interacción directa con un objeto
+	if blocked_by_interaction:
+		sprite.visible = false
+	else:
 		sprite.visible = _hay_algo_interactuable(pos_actual)
-		global_position = _actualizar_visual(pos_actual)
+		
+	global_position = _actualizar_visual(pos_actual)
 
 func _grid_offset_desde_direccion(direccion: Vector2) -> Vector2i:
 	# En lugar de píxeles, devolvemos offsets de 1 coordenada de grilla
@@ -158,13 +162,7 @@ func _get_objeto_en(pos: Vector2i) -> Node:
 	return null
 
 func _show_interaction_prompt(data: InteractionData) -> void:
-	print("Show interaction prompt")
 	blocked_by_interaction = true
-	sprite.visible = false
-	collision_shape.disabled = true
 
 func _hide_interaction_prompt() -> void:
-	print("Hide interaction prompt")
 	blocked_by_interaction = false
-	sprite.visible = true
-	collision_shape.disabled = false
